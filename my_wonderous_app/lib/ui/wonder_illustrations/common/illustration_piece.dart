@@ -71,7 +71,7 @@ class _IllustrationPieceState extends State<IllustrationPiece> {
 
     if(aspectRatio == null) {
       aspectRatio == 0;
-      rootBundle.load(img)
+      // rootBundle.load(img)
     }
     return Placeholder();
 

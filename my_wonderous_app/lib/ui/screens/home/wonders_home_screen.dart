@@ -5,6 +5,7 @@ import 'package:wonders/common_libs.dart';
 import 'package:flutter/material.dart';
 import 'package:wonders/main.dart';
 import 'package:wonders/ui/common/previous_next_navigation.dart';
+import 'package:wonders/ui/common/wonder_illustration.dart';
 import 'package:wonders/ui/common/wonder_illustration_config.dart';
 
 import '../../../logic/data/wonder_data.dart';
@@ -43,9 +44,6 @@ class _HomeScreenState extends State<HomeScreen> with GetItStatefulWidgetMixin {
 
   void _handlePrevNext(int i) => _setPageIndex(_wonderIndex + i,animate: true);
   bool _isSelected(WonderType t) => t == currentWonder.type;
-
-
-
 
   void _setPageIndex(int index,{bool animate = false}) {
     if(index == _wonderIndex) return;
@@ -120,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> with GetItStatefulWidgetMixin {
           onNextPressed: () => _handlePrevNext(1),
           child: Stack(
             children: [
-              ...bui
+              ..._buildBgAndClouds()
             ],
           )
       ),
@@ -135,12 +133,18 @@ class _HomeScreenState extends State<HomeScreen> with GetItStatefulWidgetMixin {
           isShowing: _isSelected(e.type),
 
         );
+        return WonderIllustration(e.type, config: config);
 
-        return Wonderill
+      }),
 
-      })
+      FractionallySizedBox(
+        widthFactor: 1,
+        heightFactor: .5,
+        child: AnimatedC,
+      )
 
-    ]
+    ];
+
 
   }
 }

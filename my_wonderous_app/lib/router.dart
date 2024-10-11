@@ -31,7 +31,7 @@ final appRouter = GoRouter(
       routes: [
         // AppRoute(ScreenPaths.splash, (_) => Container(color: $styles.colors.greyStrong,)),
         AppRoute(ScreenPaths.splash, (_) => PageNotFound(url: "url")),
-        AppRoute(ScreenPaths.home, (_) => Homescrenn)
+        // AppRoute(ScreenPaths.home, (_) => Homescrenn)
 
       ]
 
