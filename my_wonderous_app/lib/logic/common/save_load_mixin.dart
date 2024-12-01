@@ -6,8 +6,10 @@ import 'package:wonders/logic/common/throttler.dart';
 mixin ThrottledSaveLoadMixin {
 
 
+  //封装第三方本地缓存
   late final _file = JsonPrefsFile(fileName);
 
+  //模拟定时器
   final _throttle = Throttler(const Duration(seconds: 2));
 
   Future<void> load() async {
@@ -16,6 +18,7 @@ mixin ThrottledSaveLoadMixin {
       copyFromJson(results);
 
     }on Exception catch (e) {
+
       debugPrint(e.toString());
     }
   }

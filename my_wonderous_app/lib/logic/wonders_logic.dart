@@ -1,6 +1,5 @@
 import 'package:collection/collection.dart';
 import 'package:get_it/get_it.dart';
-import 'package:google_maps_flutter_web/google_maps_flutter_web.dart';
 import 'package:wonders/logic/data/wonder_data.dart';
 import 'package:wonders/logic/data/wonder_type.dart';
 import 'package:wonders/logic/data/wonders_data/chichen_itza_data.dart';

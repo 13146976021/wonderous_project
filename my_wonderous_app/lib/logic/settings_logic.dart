@@ -1,8 +1,10 @@
 
 
 import 'package:flutter/cupertino.dart';
+import 'package:wonders/common_libs.dart';
 import 'package:wonders/logic/common/platform_info.dart';
 import 'package:wonders/logic/common/save_load_mixin.dart';
+
 
 class SettingsLogic with ThrottledSaveLoadMixin {
 
@@ -17,10 +19,13 @@ class SettingsLogic with ThrottledSaveLoadMixin {
   late final currentLocale = ValueNotifier<String?>(null)..addListener(scheduleSave);
   late final prevWonderIndex = ValueNotifier<int?>(null)..addListener(scheduleSave);
 
+
   final bool useBlurs = !PlatformInfo.isAndroid;
 
   Future<void> changeLocale(Locale value) async {
     currentLocale.value = value.languageCode;
+    await localeLogic.loadIfChange(value);
+    wondersLogic.init();
   }
 
 

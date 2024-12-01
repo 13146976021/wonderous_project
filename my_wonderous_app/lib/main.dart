@@ -10,14 +10,17 @@ import 'package:go_router/go_router.dart';
 import 'package:wonders/logic/app_logic.dart';
 import 'package:wonders/logic/locale_logic.dart';
 import 'package:wonders/logic/settings_logic.dart';
+import 'package:wonders/logic/unsplash_logic.dart';
 import 'package:wonders/logic/wonders_logic.dart';
 import 'package:wonders/router.dart';
 import 'package:wonders/styles/styles.dart';
 import 'package:wonders/ui/app_scaffold.dart';
 import 'package:wonders/ui/common/Appshortcuts.dart';
 
+
 main() async {
 
+  print("===========");
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   //展示启动图
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
@@ -26,6 +29,9 @@ main() async {
 
   //注册单例的类
   registerSingletons();
+
+  await localeLogic.load();
+  wondersLogic.init();
 
   //运行app
   runApp(WondersApp());
@@ -47,10 +53,12 @@ class WondersApp extends StatelessWidget with GetItMixin{
   Widget build(BuildContext context) {
     final local = watchX((SettingsLogic s) => s.currentLocale);
 
+
     return MaterialApp.router(
       routeInformationProvider: appRouter.routeInformationProvider,
       routeInformationParser: appRouter.routeInformationParser,
       locale: local == null ? null : Locale(local),
+
       debugShowCheckedModeBanner: false,
       routerDelegate: appRouter.routerDelegate,
       shortcuts: Appshortcuts.defaults,
@@ -63,6 +71,7 @@ class WondersApp extends StatelessWidget with GetItMixin{
         GlobalCupertinoLocalizations.delegate
 
       ],
+      supportedLocales: AppLocalizations.supportedLocales,
     );
   }
 }
@@ -75,6 +84,9 @@ GetIt.I.registerLazySingleton<SettingsLogic>(() => SettingsLogic());
 GetIt.I.registerLazySingleton<LocaleLogic>(() => LocaleLogic());
 GetIt.I.registerLazySingleton<WondersLogic>(() => WondersLogic());
 
+GetIt.I.registerLazySingleton<UnsplashLogic>(() => UnsplashLogic());
+
+
 
 }
 
@@ -82,6 +94,8 @@ AppLogic get appLogic => GetIt.I.get<AppLogic>();
 SettingsLogic get settingsLogic => GetIt.I.get<SettingsLogic>();
 LocaleLogic get localeLogic => GetIt.I.get<LocaleLogic>();
 WondersLogic get wondersLogic => GetIt.I.get<WondersLogic>();
+
+UnsplashLogic get unsplashLogic => GetIt.I.get<UnsplashLogic>();
 
 
 

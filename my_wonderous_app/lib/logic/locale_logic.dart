@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:intl/find_locale.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/intl_standalone.dart';
 import 'package:wonders/main.dart';
 
 class LocaleLogic {

@@ -11,6 +11,7 @@ import 'package:wonders/assets.dart';
 import 'package:wonders/logic/common/platform_info.dart';
 import 'package:wonders/logic/locale_logic.dart';
 import 'package:wonders/main.dart';
+import 'package:wonders/ui/common/page_routes.dart';
 class AppLogic {
 
 
@@ -19,7 +20,7 @@ class AppLogic {
   Size _appSize = Size.zero;
 
   //判断是否是第一次进入app
-  bool isBootstrapComplete = false;
+  bool isBootstrapComplete = true;
 
   //默认横屏和竖屏
   List<Axis> supportedOrientations = [Axis.vertical, Axis.horizontal];
@@ -34,6 +35,7 @@ class AppLogic {
       _updateSystemOrientation();
     }
   }
+  bool shouldUseNavRail() => _appSize.width > _appSize.height && _appSize.height > 250;
 
 
   Future<void> bootstrap() async {
@@ -56,6 +58,9 @@ class AppLogic {
     await AppBitmaps.init();
     await localeLogic.load();
 
+    wondersLogic.init();
+
+
 
     if(!kIsWeb && PlatformInfo.isAndroid) {
       await FlutterDisplayMode.setHighRefreshRate();
@@ -66,6 +71,11 @@ class AppLogic {
   Display get display => PlatformDispatcher.instance.displays.first;
 
 
+  Future<T?> showFullscreenDialogRoute<T>(BuildContext context, Widget child, {bool transparent = false}) async {
+    return await Navigator.of(context).push<T>(
+      PageRoutes.dialog<T>(child, duration: $styles.times.pageTransition),
+    );
+  }
 
   void handleAppSizeChanged(Size appSize) {
     bool isSmall = display.size.shortestSide / display.devicePixelRatio < 600;

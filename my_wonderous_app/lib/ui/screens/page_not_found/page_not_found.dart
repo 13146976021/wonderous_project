@@ -11,8 +11,6 @@ class PageNotFound extends StatelessWidget {
   const PageNotFound({super.key, required this.url});
   final String url;
 
-
-
   @override
   Widget build(BuildContext context) {
     void handleHomePress() => context.go(ScreenPaths.home);
@@ -34,7 +32,7 @@ class PageNotFound extends StatelessWidget {
                 bgColor: $styles.colors.white,
                 onPressed: handleHomePress,
                 semanticLabel: "back",
-              child: DrakText(child: Text(
+              child: DarkText(child: Text(
                 $strings.pageNotFoundBackButton,
                 style: $styles.text.btn.copyWith(fontSize: 12),
               )),

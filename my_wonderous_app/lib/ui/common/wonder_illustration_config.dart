@@ -20,6 +20,7 @@ class WonderIllustrationConfig{
   final bool enableHero;
   final bool enableAnims;
   final bool shortMode;
+
   /// Shortcut constructors to reduce boilerplate in the views when only 1 layer is required.
   factory WonderIllustrationConfig.fg({
     double zoom = _defaultZoom,
@@ -37,6 +38,9 @@ class WonderIllustrationConfig{
         enableMg: false,
         shortMode: shortMode,
       );
+
+
+
   factory WonderIllustrationConfig.bg({
     double zoom = _defaultZoom,
     bool isShowing = true,
@@ -53,6 +57,10 @@ class WonderIllustrationConfig{
         enableMg: false,
         shortMode: shortMode,
       );
+
+
+
+
   factory WonderIllustrationConfig.mg({
     double zoom = _defaultZoom,
     bool isShowing = true,
@@ -70,3 +78,6 @@ class WonderIllustrationConfig{
         shortMode: shortMode,
       );
 }
+
+
+

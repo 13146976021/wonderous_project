@@ -45,7 +45,12 @@ class AppStyle {
 
   late final _Corners corners = _Corners();
 
+  late final _Shadows shadows = _Shadows();
+
+
 }
+
+
 
 
 @immutable
@@ -168,3 +173,15 @@ class _Times {
   final Duration pageTransition = const Duration(milliseconds: 200);
 }
 
+@immutable
+class _Shadows {
+  final textSoft = [
+    Shadow(color: Colors.black.withOpacity(.25), offset: const Offset(0, 2), blurRadius: 4),
+  ];
+  final text = [
+    Shadow(color: Colors.black.withOpacity(.6), offset: const Offset(0, 2), blurRadius: 2),
+  ];
+  final textStrong = [
+    Shadow(color: Colors.black.withOpacity(.6), offset: const Offset(0, 4), blurRadius: 6),
+  ];
+}
