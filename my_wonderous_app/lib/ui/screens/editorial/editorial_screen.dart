@@ -11,6 +11,7 @@ import 'package:wonders/styles/wonders_color_extensions.dart';
 import 'package:wonders/ui/common/compass_divider.dart';
 import 'package:wonders/ui/common/curved_clippers.dart';
 import 'package:wonders/ui/common/fullscreen_keyboard_list_scroller.dart';
+import 'package:wonders/ui/common/hiddent_collectible.dart';
 import 'package:wonders/ui/common/pop_router_on_over_scroll.dart';
 import 'package:wonders/ui/common/scaling_list_item.dart';
 import 'package:wonders/ui/common/themed_text.dart';
@@ -140,7 +141,7 @@ class _WonderEditorialScreenState extends State<WonderEditorialScreen> {
                                 collapsedHeight: minAppBarHeight,
                                 toolbarHeight: minAppBarHeight,
                                 expandedHeight: maxAppBarHeight,
-                                backgroundColor: Colors.yellow,
+                                backgroundColor: Colors.purple,
                                 elevation: 0,
                                 leading: SizedBox.shrink(),
                                 flexibleSpace: SizedBox.expand(
@@ -151,17 +152,7 @@ class _WonderEditorialScreenState extends State<WonderEditorialScreen> {
                                   ),
                                 ),
                               ),
-                              SliverToBoxAdapter(
-                                child: SizedBox(
-                                  height: 400,
-                                  child: Container(
-                                    color: Colors.red,
-                                    child: Center(
-                                      child: Text("111"),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                            _ScrollingContent(widget.data, scrollPos: _scrollPos, sectionNotifier: _sectionIndex)
                             ],
                           ),
                         ),

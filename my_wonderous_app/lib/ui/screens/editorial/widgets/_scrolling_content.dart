@@ -74,17 +74,61 @@ class _ScrollingContent extends StatelessWidget {
           1 => [WonderType.pyramidsGiza, WonderType.petra],
           2 => [WonderType.machuPicchu, WonderType.chichenItza],
           _ => [WonderType.tajMahal, WonderType.greatWall],
-        }
+        };
+
       }
 
 
-      return Hidd
+      return HiddentCollectible(data.type, index: 0, size: 120, matches: getTypesForSlot(slot));
+
     }
 
 
-    return const Placeholder();
+    return SliverBackgroundColor(
+        color: Colors.orange,
+      sliver: SliverPadding(
+        padding: EdgeInsets.symmetric(vertical: $styles.instes.md),
+        sliver: SliverList(
+          delegate: SliverChildListDelegate.fixed([
+            
+            Center(
+              child: SizedBox(
+                width: $styles.sizes.maxContentWidth1,
+                child: Column(children: [
+                  ..._contentSection([
+                    Center(child: buildHiddenCollectible(slot: 0),),
+                    buildDropCapText(data.historyInfo1),
+                  ]),
+                ],),
+              ),
+            )
+          ]),
+        ),
+        
+      ),
+    );
+  }
+
+  getTypesForSlot(int slot) {}
+  
+  List<Widget> _contentSection(List<Widget> children) {
+    return [
+      for(int i = 0; i < children.length - 1; i++) ...[
+        Padding(
+            padding: EdgeInsets.symmetric(horizontal: $styles.instes.md),
+            child: children[i],
+        ),
+        Gap($styles.instes.md),
+      ],
+      Padding(
+        padding: EdgeInsets.symmetric(horizontal: $styles.instes.md),
+        child: children.last,
+      )
+    ];
+    
   }
 }
+
 
 
 class SliverBackgroundColor extends SingleChildRenderObjectWidget {
