@@ -60,6 +60,10 @@ class _WonderEditorialScreenState extends State<WonderEditorialScreen> {
 
   @override
   Widget build(BuildContext context) {
+    void scrl(ScrollView v) {
+
+    }
+
     return LayoutBuilder(builder: (_, constraints){
       bool shortMode = constraints.biggest.height < 700;
       double illustrationHeight = shortMode ? 250 : 200;
@@ -119,7 +123,7 @@ class _WonderEditorialScreenState extends State<WonderEditorialScreen> {
                           child: CustomScrollView(
                             controller: _scroll,
                             scrollBehavior: ScrollConfiguration.of(context).copyWith(),
-                            //这个
+                            //这个需要跟PageStorage配合使用，不过Scroll里面已经有了
                             key: PageStorageKey('editorial'),
                             slivers: [
                               SliverToBoxAdapter(

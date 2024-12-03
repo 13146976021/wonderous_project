@@ -40,9 +40,7 @@ main() async {
   //引导程序
   await appLogic.bootstrap();
 
-
   FlutterNativeSplash.remove();
-
 }
 
 

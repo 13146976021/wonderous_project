@@ -99,10 +99,6 @@ String? _handleRedirect(BuildContext context, GoRouterState state){
     return ScreenPaths.home;
   }
   if (!kIsWeb) debugPrint('Navigate to: ${state.uri}');
-  
-  return null;
-  
-  
   return null;
 }
 
