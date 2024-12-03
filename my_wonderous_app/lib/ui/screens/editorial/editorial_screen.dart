@@ -40,10 +40,12 @@ class WonderEditorialScreen extends StatefulWidget {
 
 class _WonderEditorialScreenState extends State<WonderEditorialScreen> {
 
+  //触发scroll触发方法
   void _handleScrollChanged() {
     _scrollPos.value = _scroll.position.pixels;
   }
 
+  //创建scrollController 控制器，并监听其变化
   late final ScrollController _scroll = ScrollController()..addListener(_handleScrollChanged);
 
   final _scrollPos = ValueNotifier(0.0);
@@ -70,7 +72,8 @@ class _WonderEditorialScreenState extends State<WonderEditorialScreen> {
           controller: _scroll,
           //颜色背景
           child: ColoredBox(
-            color: $styles.colors.offWhite,
+            // color: $styles.colors.offWhite,
+            color: Colors.red,
 
             //页面内容
             child:  Stack(
@@ -93,10 +96,12 @@ class _WonderEditorialScreenState extends State<WonderEditorialScreen> {
                     },
                     //设置边界点，使其提高渲染效率。
                     child: RepaintBoundary(
+                      // child: Text("111"),
                       child: _TopIllustration(
                         widget.data.type,
                         fgOffset: Offset(widget.contentPadding.left / 2, 0),
-                    )),
+                    )
+                    ),
                   ),
                 ),
 
@@ -106,12 +111,15 @@ class _WonderEditorialScreenState extends State<WonderEditorialScreen> {
                   child: Padding(
                     padding: widget.contentPadding,
                     child: SizedBox(
+                      //键盘按钮
                       child: FocusTraversalGroup(
+                        //键盘
                         child: FullscreenKeyboardListScroller(
                           scrollController: _scroll,
                           child: CustomScrollView(
                             controller: _scroll,
                             scrollBehavior: ScrollConfiguration.of(context).copyWith(),
+                            //这个
                             key: PageStorageKey('editorial'),
                             slivers: [
                               SliverToBoxAdapter(

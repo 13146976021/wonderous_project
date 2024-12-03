@@ -28,7 +28,9 @@ class ArchClipper extends CustomClipper<Path> {
 }
 
 class ArchPoint {
-  ArchPoint(this.pos, [Offset? control]);
+  ArchPoint(this.pos, [Offset? control]){
+  this.control = control ?? pos;
+  }
   final Offset pos;
   late final Offset control;
 

@@ -17,7 +17,7 @@ class HiddentCollectible extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final data = collectiblesLogic
+    // final data = collectiblesL
 
     return const Placeholder();
   }

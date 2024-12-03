@@ -58,7 +58,11 @@ class StringUtils {
     return $strings.eraModern;
   }
 
+  //将首字母大写
   static String capitalize(String value) {
+    //知识点： value[0] 表示取出第一个字符。如"hello"取出的是"h"
+    //toUpperCase 是转为大写
+    //substring 取出从第二个字符开始直到最后
     return '${value[0].toUpperCase()}${value.substring(1).toLowerCase()}';
   }
 

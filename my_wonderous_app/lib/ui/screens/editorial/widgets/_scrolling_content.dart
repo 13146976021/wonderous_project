@@ -79,8 +79,7 @@ class _ScrollingContent extends StatelessWidget {
       }
 
 
-      return HiddentCollectible(data.type, index: 0, size: 120, matches: getTypesForSlot(slot));
-
+      return HiddentCollectible(data.type, index: 0, size: 120, matches: getTypeForSlot(slot));
     }
 
 
@@ -96,12 +95,23 @@ class _ScrollingContent extends StatelessWidget {
                 width: $styles.sizes.maxContentWidth1,
                 child: Column(children: [
                   ..._contentSection([
-                    Center(child: buildHiddenCollectible(slot: 0),),
-                    buildDropCapText(data.historyInfo1),
+                    Text("1111"),
+                    Text("2222"),
+                    Text("3333"),
+                    Text("4444"),
+
+                    // Center(child: buildHiddenCollectible(slot: 0),),
+                    // buildDropCapText(data.historyInfo1),
                   ]),
                 ],),
               ),
-            )
+            ),
+
+            Text("1111"),
+            Text("2222"),
+            Text("3333"),
+            Text("4444"),
+
           ]),
         ),
         
@@ -109,8 +119,6 @@ class _ScrollingContent extends StatelessWidget {
     );
   }
 
-  getTypesForSlot(int slot) {}
-  
   List<Widget> _contentSection(List<Widget> children) {
     return [
       for(int i = 0; i < children.length - 1; i++) ...[
@@ -136,7 +144,8 @@ class SliverBackgroundColor extends SingleChildRenderObjectWidget {
     super.key,
     required this.color,
     Widget? sliver,
-  });
+  }) : super(child: sliver);
+
 
   final Color color;
 

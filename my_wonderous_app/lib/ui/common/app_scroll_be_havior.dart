@@ -16,12 +16,13 @@ class AppScrollBehavior extends ScrollBehavior {
   @override
   ScrollPhysics getScrollPhysics(BuildContext context) {
     // TODO: implement getScrollPhysics
-    return BouncingScrollPhysics();
+    return const BouncingScrollPhysics();
   }
 
   @override
   Widget buildScrollbar(BuildContext context, Widget child, ScrollableDetails details) {
-    // TODO: implement buildScrollbar
+
+    if (PlatformInfo.isMobile) return child;
     return RawScrollbar(
       controller: details.controller,
       thumbVisibility: PlatformInfo.isDesktopOrWeb,

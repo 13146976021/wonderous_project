@@ -12,7 +12,7 @@ class _TopIllustration extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        WonderIllustration(type , config: WonderIllustrationConfig(enableAnims: false, shortMode: true)),
+        WonderIllustration(type , config: WonderIllustrationConfig.bg(enableAnims: false, shortMode: true)),
         Transform.translate(
           offset: fgOffset + Offset(0, 10),
           child: WonderIllustration(

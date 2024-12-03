@@ -17,7 +17,6 @@ class _TitleText extends StatelessWidget {
               children: [
                 Gap($styles.instes.md),
                 Gap(30),
-
                  SeparatedRow(
                     padding: EdgeInsets.symmetric(horizontal: $styles.instes.sm),
                     separatorBuilder: () => Gap($styles.instes.sm),
@@ -49,7 +48,7 @@ class _TitleText extends StatelessWidget {
                     animation: scroller,
                     builder: (_, __) {
                       final yPos = ContextUtils.getGlobalPos(context)?.dy ?? 0;
-                      bool enableHero = yPos > -100;
+                      bool enableHero = false;
                       return WonderTitleText(data,enableHero: enableHero,);
 
                     },
@@ -58,7 +57,7 @@ class _TitleText extends StatelessWidget {
                 Gap($styles.instes.xs),
                 Text(
                   data.regionTitle.toUpperCase(),
-                  style: $styles.text.title1,
+                  style: $styles.text.title2,
                   textAlign: TextAlign.center,
                 ),
 

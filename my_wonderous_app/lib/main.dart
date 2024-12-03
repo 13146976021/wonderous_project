@@ -9,6 +9,7 @@ import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wonders/logic/app_logic.dart';
 import 'package:wonders/logic/locale_logic.dart';
+import 'package:wonders/logic/native_widget_service.dart';
 import 'package:wonders/logic/settings_logic.dart';
 import 'package:wonders/logic/unsplash_logic.dart';
 import 'package:wonders/logic/wonders_logic.dart';
@@ -85,6 +86,7 @@ GetIt.I.registerLazySingleton<LocaleLogic>(() => LocaleLogic());
 GetIt.I.registerLazySingleton<WondersLogic>(() => WondersLogic());
 
 GetIt.I.registerLazySingleton<UnsplashLogic>(() => UnsplashLogic());
+GetIt.I.registerLazySingleton<NativeWidgetService>(() => NativeWidgetService());
 
 
 

@@ -61,7 +61,7 @@ class _AnimatedCircleWithTextState extends State<_AnimatedCircleWithText> with S
 
   int _prevIndex = -1;
   String get oldTitle => _prevIndex == -1? '' : widget.titles[_prevIndex];
-  String get newTitle => widget.titles[_prevIndex];
+  String get newTitle => widget.titles[widget.index];
   late final _anim = AnimationController(
       vsync: this,
       duration: $styles.times.med
