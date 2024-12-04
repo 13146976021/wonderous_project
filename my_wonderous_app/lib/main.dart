@@ -8,6 +8,8 @@ import 'package:get_it/get_it.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wonders/logic/app_logic.dart';
+import 'package:wonders/logic/artifact_api_logic.dart';
+import 'package:wonders/logic/collectibles_logic.dart';
 import 'package:wonders/logic/locale_logic.dart';
 import 'package:wonders/logic/native_widget_service.dart';
 import 'package:wonders/logic/settings_logic.dart';
@@ -85,6 +87,10 @@ GetIt.I.registerLazySingleton<WondersLogic>(() => WondersLogic());
 
 GetIt.I.registerLazySingleton<UnsplashLogic>(() => UnsplashLogic());
 GetIt.I.registerLazySingleton<NativeWidgetService>(() => NativeWidgetService());
+GetIt.I.registerLazySingleton<CollectiblesLogic>(() => CollectiblesLogic());
+GetIt.I.registerLazySingleton<ArtifactAPILogic>(() => ArtifactAPILogic());
+
+
 
 
 
@@ -94,6 +100,12 @@ AppLogic get appLogic => GetIt.I.get<AppLogic>();
 SettingsLogic get settingsLogic => GetIt.I.get<SettingsLogic>();
 LocaleLogic get localeLogic => GetIt.I.get<LocaleLogic>();
 WondersLogic get wondersLogic => GetIt.I.get<WondersLogic>();
+
+
+CollectiblesLogic get collectiblesLogic => GetIt.I.get<CollectiblesLogic>();
+
+ArtifactAPILogic get artifactLogic => GetIt.I.get<ArtifactAPILogic>();
+
 
 UnsplashLogic get unsplashLogic => GetIt.I.get<UnsplashLogic>();
 

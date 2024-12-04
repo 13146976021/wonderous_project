@@ -100,7 +100,7 @@ class _ScrollingContent extends StatelessWidget {
                     Text("3333"),
                     Text("4444"),
 
-                    // Center(child: buildHiddenCollectible(slot: 0),),
+                    Center(child: buildHiddenCollectible(slot: 0),),
                     // buildDropCapText(data.historyInfo1),
                   ]),
                 ],),
