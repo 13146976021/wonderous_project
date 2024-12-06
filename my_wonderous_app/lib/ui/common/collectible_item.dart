@@ -2,6 +2,8 @@ import 'package:wonders/common_libs.dart';
 import 'package:wonders/logic/collectibles_logic.dart';
 import 'package:wonders/logic/data/collectible_data.dart';
 import 'package:wonders/ui/common/opening_card.dart';
+import 'package:wonders/ui/common/utils/app_haptics.dart';
+import 'package:wonders/ui/screens/collectible_found/collectible_found_screen.dart';
 
 class CollectibleItem extends StatelessWidget with GetItMixin{
   CollectibleItem({super.key, required this.collectible, required this.size,  this.focus}) {
@@ -15,6 +17,13 @@ class CollectibleItem extends StatelessWidget with GetItMixin{
   final FocusNode? focus;
 
   void _handleTap(BuildContext context) async {
+
+    final screen = CollectibleFoundScreen(collectible: collectible, imageProvider: _imageProvider);
+    appLogic.showFullscreenDialogRoute(context, screen, transparent: true);
+    AppHaptics.mediumImpact();
+
+    await Future.delayed($styles.times.pageTransition);
+    collectiblesLogic.setState(collectible.id, CollectibleState.discovered);
   }
 
   @override
@@ -22,13 +31,14 @@ class CollectibleItem extends StatelessWidget with GetItMixin{
     final states = watchX((CollectiblesLogic c) => c.stateById);
     bool isLost = states[collectible.id] == CollectibleState.lost;
 
+    print("${collectible.icon} + _______________-");
 
 
     return SizedBox(
-      height: isLost ? size : null,
+      height: size,
       child:  RepaintBoundary(
         child:  OpeningCard(
-            isOpen: isLost,
+            isOpen: true,
             closedBuilder: (_) => SizedBox(width: 1,height: 0,),
             openBuilder: (_) => AppBtn.basic(
               focusNode: focus,

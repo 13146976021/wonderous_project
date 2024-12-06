@@ -22,10 +22,10 @@ class HiddentCollectible extends StatelessWidget {
     final data = collectiblesLogic.forWonder(currentWonder);
 
 
-    if(matches.isNotEmpty && matches.contains(currentWonder) == false) {
-      return SizedBox.shrink();
-
-    }
+    // if(matches.isNotEmpty && matches.contains(currentWonder) == false) {
+    //   return SizedBox.shrink();
+    //
+    // }
     return CollectibleItem(collectible:data[index], size: size);
 
   }

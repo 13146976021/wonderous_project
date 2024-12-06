@@ -8,12 +8,16 @@ import 'package:wonders/common_libs.dart';
 import 'package:wonders/logic/data/wonder_data.dart';
 import 'package:wonders/logic/string_utils.dart';
 import 'package:wonders/styles/wonders_color_extensions.dart';
+import 'package:wonders/ui/common/blend_mask.dart';
+import 'package:wonders/ui/common/centered_box.dart';
 import 'package:wonders/ui/common/compass_divider.dart';
 import 'package:wonders/ui/common/curved_clippers.dart';
 import 'package:wonders/ui/common/fullscreen_keyboard_list_scroller.dart';
+import 'package:wonders/ui/common/gradient_container.dart';
 import 'package:wonders/ui/common/hiddent_collectible.dart';
 import 'package:wonders/ui/common/pop_router_on_over_scroll.dart';
 import 'package:wonders/ui/common/scaling_list_item.dart';
+import 'package:wonders/ui/common/static_text_scale.dart';
 import 'package:wonders/ui/common/themed_text.dart';
 import 'package:wonders/ui/common/utils/context_utils.dart';
 import 'package:wonders/ui/common/wonder_illustration.dart';
@@ -26,6 +30,7 @@ part 'widgets/_title_text.dart';
 part 'widgets/_app_bar.dart';
 part 'widgets/_circular_title_bar.dart';
 part 'widgets/_scrolling_content.dart';
+part 'widgets/_collapsing_pull_quote_image.dart';
 
 class WonderEditorialScreen extends StatefulWidget {
   const WonderEditorialScreen(this.data,{super.key,required this.contentPadding});

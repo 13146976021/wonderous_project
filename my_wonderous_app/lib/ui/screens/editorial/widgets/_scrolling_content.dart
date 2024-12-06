@@ -84,7 +84,7 @@ class _ScrollingContent extends StatelessWidget {
 
 
     return SliverBackgroundColor(
-        color: Colors.orange,
+        color: $styles.colors.offWhite,
       sliver: SliverPadding(
         padding: EdgeInsets.symmetric(vertical: $styles.instes.md),
         sliver: SliverList(
@@ -95,22 +95,16 @@ class _ScrollingContent extends StatelessWidget {
                 width: $styles.sizes.maxContentWidth1,
                 child: Column(children: [
                   ..._contentSection([
-                    Text("1111"),
-                    Text("2222"),
-                    Text("3333"),
-                    Text("4444"),
 
                     Center(child: buildHiddenCollectible(slot: 0),),
-                    // buildDropCapText(data.historyInfo1),
+                    buildDropCapText(data.historyInfo1),
+                    _CollapsingPullQuoteImage(scrollPos: scrollPos, data: data),
+
+
                   ]),
                 ],),
               ),
             ),
-
-            Text("1111"),
-            Text("2222"),
-            Text("3333"),
-            Text("4444"),
 
           ]),
         ),
