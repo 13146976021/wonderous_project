@@ -1,5 +1,4 @@
 import 'package:collection/collection.dart';
-import 'package:get_it/get_it.dart';
 import 'package:wonders/logic/data/wonder_data.dart';
 import 'package:wonders/logic/data/wonder_type.dart';
 import 'package:wonders/logic/data/wonders_data/chichen_itza_data.dart';
@@ -17,7 +16,6 @@ class WondersLogic {
   final int timelineEndYear = 2200;
 
   WonderData getData(WonderType value){
-
     WonderData? result = all.firstWhereOrNull((w) => w.type == value);
     if(result == null) throw('could not find data for wonder type $value');
     return result;

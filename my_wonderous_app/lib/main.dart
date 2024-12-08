@@ -20,26 +20,24 @@ import 'package:wonders/styles/styles.dart';
 import 'package:wonders/ui/app_scaffold.dart';
 import 'package:wonders/ui/common/Appshortcuts.dart';
 
+//使用异步加载main函数是为了处理一些耗时操作
+void main() async {
 
-main() async {
-
-  print("===========");
+  //FlutterNativeSplash插件或框架需要访问 Flutter 的引擎或绑定层
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  //展示启动图
+  //插件防止应用程序过早的关闭启动页，即时应用加载完成也可继续显示启动页。
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  //开始
+
+  //仅在web平台有效
   GoRouter.optionURLReflectsImperativeAPIs = true;
 
   //注册单例的类
   registerSingletons();
 
-  await localeLogic.load();
-  wondersLogic.init();
-
   //运行app
   runApp(WondersApp());
 
-  //引导程序
+  //各种初始化设置，展示轮播图
   await appLogic.bootstrap();
 
   FlutterNativeSplash.remove();
@@ -52,6 +50,8 @@ class WondersApp extends StatelessWidget with GetItMixin{
 
   @override
   Widget build(BuildContext context) {
+
+    print("WondersApp =============");
     final local = watchX((SettingsLogic s) => s.currentLocale);
 
 
@@ -79,7 +79,6 @@ class WondersApp extends StatelessWidget with GetItMixin{
 
 
 void registerSingletons() {
-
 GetIt.I.registerLazySingleton<AppLogic>(() => AppLogic());
 GetIt.I.registerLazySingleton<SettingsLogic>(() => SettingsLogic());
 GetIt.I.registerLazySingleton<LocaleLogic>(() => LocaleLogic());
@@ -89,24 +88,14 @@ GetIt.I.registerLazySingleton<UnsplashLogic>(() => UnsplashLogic());
 GetIt.I.registerLazySingleton<NativeWidgetService>(() => NativeWidgetService());
 GetIt.I.registerLazySingleton<CollectiblesLogic>(() => CollectiblesLogic());
 GetIt.I.registerLazySingleton<ArtifactAPILogic>(() => ArtifactAPILogic());
-
-
-
-
-
 }
 
 AppLogic get appLogic => GetIt.I.get<AppLogic>();
 SettingsLogic get settingsLogic => GetIt.I.get<SettingsLogic>();
 LocaleLogic get localeLogic => GetIt.I.get<LocaleLogic>();
 WondersLogic get wondersLogic => GetIt.I.get<WondersLogic>();
-
-
 CollectiblesLogic get collectiblesLogic => GetIt.I.get<CollectiblesLogic>();
-
 ArtifactAPILogic get artifactLogic => GetIt.I.get<ArtifactAPILogic>();
-
-
 UnsplashLogic get unsplashLogic => GetIt.I.get<UnsplashLogic>();
 
 

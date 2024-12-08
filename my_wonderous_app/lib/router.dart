@@ -8,6 +8,7 @@ import 'package:wonders/logic/data/wonder_type.dart';
 import 'package:wonders/main.dart';
 import 'package:wonders/ui/app_scaffold.dart';
 import 'package:wonders/ui/screens/home/wonders_home_screen.dart';
+import 'package:wonders/ui/screens/intro/intro_screen.dart';
 import 'package:wonders/ui/screens/page_not_found/page_not_found.dart';
 import 'package:wonders/ui/screens/wonder_details/wonder_details_screen.dart';
 
@@ -44,6 +45,7 @@ final appRouter = GoRouter(
       },
       routes: [
         AppRoute(ScreenPaths.splash, (_) => Container(color: $styles.colors.greyStrong,)),
+        AppRoute(ScreenPaths.intro,(_) => const IntroScreen()),
         AppRoute(ScreenPaths.home,(_) => const HomeScreen(), routes: [
         _timelineRoute,
         _collectionRoute,

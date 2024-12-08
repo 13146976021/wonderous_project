@@ -268,69 +268,7 @@ class _YouTubeThumbnail extends StatelessWidget {
   }
 }
 
-// class _MapsThumbnail extends StatefulWidget {
-//   const _MapsThumbnail(this.data,{super.key});
-//
-//   final WonderData data;
-//
-//   @override
-//   State<_MapsThumbnail> createState() => _MapsThumbnailState();
-// }
-//
-// class _MapsThumbnailState extends State<_MapsThumbnail> {
-//
-//   CameraPosition get startPos => CameraPosition(target: LatLng(widget.data.lat,widget.data.lng),zoom: 3);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     void handlePressed() => context.go(ScreenPaths.maps(widget.data.type));
-//     if(PlatformInfo.isDesktop) return SizedBox.shrink();
-//
-//     return AspectRatio(
-//         aspectRatio: 1.65,
-//         child: MergeSemantics(
-//           child: Column(
-//             children: [
-//               Flexible(
-//                   child: ClipRRect(
-//                     borderRadius: BorderRadius.circular($styles.corners.md),
-//                     child: AppBtn.basic(
-//                         onPressed: handlePressed,
-//                         semanticLabel: $strings.scrollingContentSemanticOpen,
-//                         child: Stack(
-//                           children: [
-//                             const Positioned.fill(child: ColoredBox(color: Colors.transparent,)),
-//                             IgnorePointer(
-//                               child: GoogleMap(
-//                                 markers: {getMapsMarker(startPos.target)},
-//                                 zoomControlsEnabled: false,
-//                                 mapType: MapType.normal,
-//                                 mapToolbarEnabled: false,
-//                                 initialCameraPosition: startPos,
-//                                 myLocationButtonEnabled: false,
-//
-//                               ),
-//                             )
-//                           ],
-//                         ),
-//                     ),
-//                   ),
-//               ),
-//
-//               Gap($styles.instes.xs),
-//               Semantics(
-//                 sortKey: OrdinalSortKey(0),
-//                 child: Padding(
-//                   padding: EdgeInsets.symmetric(horizontal: $styles.instes.md),
-//                   child: Text(widget.data.mapCaption,style: $styles.text.caption,),
-//                 ),
-//               )
-//             ],
-//           ),
-//         ),
-//     );
-//   }
-// }
+
 
 class _MapsThumbnail extends StatefulWidget {
   const _MapsThumbnail(this.data, {super.key});

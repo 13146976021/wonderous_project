@@ -8,14 +8,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:wonders/assets.dart';
+import 'package:wonders/common_libs.dart';
 import 'package:wonders/logic/common/platform_info.dart';
 import 'package:wonders/logic/locale_logic.dart';
 import 'package:wonders/main.dart';
 import 'package:wonders/ui/common/page_routes.dart';
 class AppLogic {
-
-
-
   ///app的大小
   Size _appSize = Size.zero;
 
@@ -40,15 +38,14 @@ class AppLogic {
 
   Future<void> bootstrap() async {
     debugPrint("bootsrap start");
+    //桌面应用
     if(PlatformInfo.isDesktop) {
       //如果是桌面端，设置最小宽高
       await DesktopWindow.setMinWindowSize($styles.sizes.minAppSize);
     }
 
 
-
-
-
+    //是否是web应用
     i(kIsWeb) {
       //请求web自动启用无障碍功能
       WidgetsFlutterBinding.ensureInitialized().ensureSemantics();
@@ -56,15 +53,31 @@ class AppLogic {
 
 
     await AppBitmaps.init();
+
     await localeLogic.load();
 
     wondersLogic.init();
 
+    isBootstrapComplete = true;
 
 
     if(!kIsWeb && PlatformInfo.isAndroid) {
       await FlutterDisplayMode.setHighRefreshRate();
     }
+    appRouter.go(ScreenPaths.intro);
+
+    // bool showIntro = settingsLogic.hasCompletedOnboarding.value = false;
+    // if(showIntro) {
+    //   appRouter.go(ScreenPaths.intro);
+    // }else {
+    //   appRouter.go(ScreenPaths.home);
+    //
+    // }
+
+
+
+
+
 
   }
 
