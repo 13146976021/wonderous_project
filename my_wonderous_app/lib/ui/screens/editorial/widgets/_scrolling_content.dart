@@ -55,7 +55,7 @@ class _ScrollingContent extends StatelessWidget {
               ),
             ),
             style: $styles.text.body,
-            dropCapPadding: EdgeInsets.only(right: 6),
+            dropCapPadding: const EdgeInsets.only(right: 6),
             dropCapStyle: $styles.text.dropCase.copyWith(
               color: $styles.colors.accent1,
               height: 1
@@ -99,9 +99,35 @@ class _ScrollingContent extends StatelessWidget {
                     Center(child: buildHiddenCollectible(slot: 0),),
                     buildDropCapText(data.historyInfo1),
                     _CollapsingPullQuoteImage(scrollPos: scrollPos, data: data),
-
+                    Center(child: buildHiddenCollectible(slot: 1),),
+                    _Callout(data.callout1),
+                    buildText(data.historyInfo2),
+                    _SectionDivider(scrollPos, sectionNotifier, index: 1),
+                    buildDropCapText(data.constructionInfo1),
+                    Center(child: buildHiddenCollectible(slot: 2)),
+                    _YouTubeThumbnail(id: data.videoId, caption: data.videoCaption),
 
                   ]),
+                  Gap($styles.instes.md),
+                  ..._contentSection([
+                    Gap($styles.instes.xs),
+                    _Callout(data.callout2),
+                    buildText(data.constructionInfo2),
+
+                    _SlidingImageStack(scrollPos: scrollPos, type: data.type),
+                    _SectionDivider(scrollPos, sectionNotifier, index: 2),
+
+                    buildDropCapText(data.locationInfo1),
+                    _LargeSimpleQuotete(text: data.pullQuote2, author: data.pullQuote2Author),
+                    buildText(data.locationInfo2),
+
+                  ]),
+
+                  Gap($styles.instes.md),
+                  _MapsThumbnail(data),
+                  Gap($styles.instes.md),
+                  ..._contentSection([Center(child: buildHiddenCollectible(slot: 3),)]),
+
                 ],),
               ),
             ),
@@ -172,6 +198,7 @@ class RenderSliverBackgroundColor extends RenderProxySliver {
   }
   @override
   void paint(PaintingContext context, Offset offset){
+
     if(child != null && child!.geometry!.visible) {
       final SliverPhysicalParentData childParentData = child!.parentData! as SliverPhysicalParentData;
 
@@ -184,4 +211,186 @@ class RenderSliverBackgroundColor extends RenderProxySliver {
   }
 
 
+}
+
+
+class _YouTubeThumbnail extends StatelessWidget {
+  const _YouTubeThumbnail({super.key, required this.id, required this.caption});
+  final String id;
+  final String caption;
+
+  String get imageUrl => 'https://www.wonderous.info/youtube/$id.jpg';
+
+
+  @override
+  Widget build(BuildContext context) {
+
+    void handlePressed() => context.go(ScreenPaths.video(id));
+
+    return MergeSemantics(
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: 400),
+        child: Column(
+          children: [
+            AppBtn.basic(
+                onPressed: handlePressed,
+                semanticLabel: $strings.scrollingContentSemanticYoutube,
+                child: Stack(
+                  children: [
+                    AppImage(image: NetworkImage(imageUrl),fit: BoxFit.cover, scale: 1.0,),
+                    Positioned.fill(child: Center(child: Container(
+                      padding: EdgeInsets.all($styles.instes.xs),
+                      decoration: BoxDecoration(
+                        color: $styles.colors.black.withOpacity(0.66),
+                        borderRadius: BorderRadius.circular(999),
+                      ),
+                      child: Icon(
+                        Icons.play_arrow,
+                        color: $styles.colors.white,
+                        size: $styles.instes.xl,
+                      ),
+                    ),))
+                  ],
+                ),
+            ),
+
+            Gap($styles.instes.xs),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: $styles.instes.md),
+              child: Text(caption,style: $styles.text.caption,),),
+
+
+
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// class _MapsThumbnail extends StatefulWidget {
+//   const _MapsThumbnail(this.data,{super.key});
+//
+//   final WonderData data;
+//
+//   @override
+//   State<_MapsThumbnail> createState() => _MapsThumbnailState();
+// }
+//
+// class _MapsThumbnailState extends State<_MapsThumbnail> {
+//
+//   CameraPosition get startPos => CameraPosition(target: LatLng(widget.data.lat,widget.data.lng),zoom: 3);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     void handlePressed() => context.go(ScreenPaths.maps(widget.data.type));
+//     if(PlatformInfo.isDesktop) return SizedBox.shrink();
+//
+//     return AspectRatio(
+//         aspectRatio: 1.65,
+//         child: MergeSemantics(
+//           child: Column(
+//             children: [
+//               Flexible(
+//                   child: ClipRRect(
+//                     borderRadius: BorderRadius.circular($styles.corners.md),
+//                     child: AppBtn.basic(
+//                         onPressed: handlePressed,
+//                         semanticLabel: $strings.scrollingContentSemanticOpen,
+//                         child: Stack(
+//                           children: [
+//                             const Positioned.fill(child: ColoredBox(color: Colors.transparent,)),
+//                             IgnorePointer(
+//                               child: GoogleMap(
+//                                 markers: {getMapsMarker(startPos.target)},
+//                                 zoomControlsEnabled: false,
+//                                 mapType: MapType.normal,
+//                                 mapToolbarEnabled: false,
+//                                 initialCameraPosition: startPos,
+//                                 myLocationButtonEnabled: false,
+//
+//                               ),
+//                             )
+//                           ],
+//                         ),
+//                     ),
+//                   ),
+//               ),
+//
+//               Gap($styles.instes.xs),
+//               Semantics(
+//                 sortKey: OrdinalSortKey(0),
+//                 child: Padding(
+//                   padding: EdgeInsets.symmetric(horizontal: $styles.instes.md),
+//                   child: Text(widget.data.mapCaption,style: $styles.text.caption,),
+//                 ),
+//               )
+//             ],
+//           ),
+//         ),
+//     );
+//   }
+// }
+
+class _MapsThumbnail extends StatefulWidget {
+  const _MapsThumbnail(this.data, {super.key});
+  final WonderData data;
+
+  @override
+  State<_MapsThumbnail> createState() => _MapsThumbnailState();
+}
+
+class _MapsThumbnailState extends State<_MapsThumbnail> {
+  CameraPosition get startPos => CameraPosition(target: LatLng(widget.data.lat, widget.data.lng), zoom: 3);
+
+  @override
+  Widget build(BuildContext context) {
+    void handlePressed() => context.go(ScreenPaths.maps(widget.data.type));
+    if (PlatformInfo.isDesktop) return SizedBox.shrink();
+    return AspectRatio(
+      aspectRatio: 1.65,
+      child: MergeSemantics(
+        child: Column(
+          children: [
+            Flexible(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular($styles.corners.md),
+                child: AppBtn.basic(
+                  semanticLabel: $strings.scrollingContentSemanticOpen,
+                  onPressed: handlePressed,
+
+                  /// To prevent the map widget from absorbing the onPressed action, use a Stack + IgnorePointer + a transparent Container
+                  child: const Stack(
+                    children: [
+                      Positioned.fill(child: ColoredBox(color: Colors.transparent)),
+                      IgnorePointer(
+                        child:SizedBox.shrink(),
+
+                        // GoogleMap(
+                        //   markers: {getMapsMarker(startPos.target)},
+                        //   zoomControlsEnabled: false,
+                        //   mapType: MapType.normal,
+                        //   mapToolbarEnabled: false,
+                        //   initialCameraPosition: startPos,
+                        //   myLocationButtonEnabled: false,
+                        // ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Gap($styles.instes.xs),
+            Semantics(
+              sortKey: OrdinalSortKey(0),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: $styles.instes.md),
+                child: Text(widget.data.mapCaption, style: $styles.text.caption),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

@@ -19,7 +19,19 @@ class ScreenPaths {
   static String settings = '/settings';
 
   static String wonderDetails(WonderType type,{required int tabIndex}) => '$home/wonder/${type.name}?t=$tabIndex';
-  
+  static String video(String id) => _appendToCurrentPath('/video/$id');
+  static String maps(WonderType type) => _appendToCurrentPath('/maps/${type.name}');
+
+
+  static String _appendToCurrentPath(String newPath) {
+    final newPathUri = Uri.parse(newPath);
+    final currentUri = appRouter.routeInformationProvider.value.uri;
+    Map<String, dynamic> params = Map.of(currentUri.queryParameters);
+    params.addAll(newPathUri.queryParameters);
+    Uri? loc = Uri(path: '${currentUri.path}/${newPathUri.path}'.replaceAll('//', '/'), queryParameters: params);
+    return loc.toString();
+  }
+
 }
 
 final appRouter = GoRouter(

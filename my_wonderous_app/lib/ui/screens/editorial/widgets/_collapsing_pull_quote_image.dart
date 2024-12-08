@@ -24,7 +24,6 @@ class _CollapsingPullQuoteImage extends StatelessWidget {
       }
       double offsetY = (imgHeight / 2 + outerPadding * .25) * (1 - collapseAmt);
       if(top) offsetY *= -1;
-      debugPrint(' offsetY =  $offsetY');
       return Transform.translate(
           offset: Offset(0, offsetY),
           child: Text(value, style: quoteStyle,textAlign: TextAlign.center)
