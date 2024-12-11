@@ -18,7 +18,7 @@ class AppLogic {
   Size _appSize = Size.zero;
 
   //判断是否是第一次进入app
-  bool isBootstrapComplete = true;
+  bool isBootstrapComplete = false;
 
   //默认横屏和竖屏
   List<Axis> supportedOrientations = [Axis.vertical, Axis.horizontal];
@@ -52,32 +52,32 @@ class AppLogic {
     }
 
 
+    //google 地图图标
     await AppBitmaps.init();
 
+    //加载语言配置信息
     await localeLogic.load();
 
+    //首页数据信息初始化
     wondersLogic.init();
 
+    //判断启动初始化是否完成
     isBootstrapComplete = true;
 
-
+    //判断是否安卓和web端，
     if(!kIsWeb && PlatformInfo.isAndroid) {
+      //开启高清模式
       await FlutterDisplayMode.setHighRefreshRate();
     }
-    appRouter.go(ScreenPaths.intro);
 
-    // bool showIntro = settingsLogic.hasCompletedOnboarding.value = false;
-    // if(showIntro) {
-    //   appRouter.go(ScreenPaths.intro);
-    // }else {
-    //   appRouter.go(ScreenPaths.home);
-    //
-    // }
-
-
-
-
-
+    //判断是否是第一次进入APP，如果是进入欢迎页面
+    bool showIntro = settingsLogic.hasCompletedOnboarding.value = false;
+    if(showIntro) {
+      appRouter.go(ScreenPaths.intro);
+    }else {
+      //进入主页
+      appRouter.go(ScreenPaths.home);
+    }
 
   }
 

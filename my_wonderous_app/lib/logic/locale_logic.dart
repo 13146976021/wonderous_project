@@ -21,6 +21,7 @@ class LocaleLogic {
 
 
 
+
   Future<void>load() async{
     //设置默认的地区
     Locale locale = _defaultLocale;
@@ -36,7 +37,7 @@ class LocaleLogic {
     //更改语言配置信息
     settingsLogic.currentLocale.value = locale.languageCode;
 
-    //根据语言
+    //加载对应的语言
     _strings = await AppLocalizations.delegate.load(locale);
 
   }

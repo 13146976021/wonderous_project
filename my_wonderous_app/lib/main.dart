@@ -40,6 +40,7 @@ void main() async {
   //各种初始化设置，展示轮播图
   await appLogic.bootstrap();
 
+  //移除插件，移除启动图，显示app内容。
   FlutterNativeSplash.remove();
 }
 
@@ -51,27 +52,40 @@ class WondersApp extends StatelessWidget with GetItMixin{
   @override
   Widget build(BuildContext context) {
 
-    print("WondersApp =============");
+    //获取s.currentLocale的值，并且当值发生改变时会触发markNeedsBuild函数刷新当前页面
     final local = watchX((SettingsLogic s) => s.currentLocale);
 
-
     return MaterialApp.router(
+
+      //捕获路由变化。从平台接收到原始的路由信息。如 /home
       routeInformationProvider: appRouter.routeInformationProvider,
+      //解析路由信息。将路径 /home 解析为应用程序的路由状态对象（如 MyRouteState.home()）。
       routeInformationParser: appRouter.routeInformationParser,
-      locale: local == null ? null : Locale(local),
-
-      debugShowCheckedModeBanner: false,
+      //根据解析后的路由状态构建和更新导航堆栈（如 Navigator）。
       routerDelegate: appRouter.routerDelegate,
-      shortcuts: Appshortcuts.defaults,
-      theme: ThemeData(fontFamily: $styles.text.body.fontFamily, useMaterial3: true),
-      color: $styles.colors.black,
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate
 
+      //默认使用的语言
+      locale: local == null ? null : Locale(local),
+      //是否显示debug横幅
+      debugShowCheckedModeBanner: false,
+      //键盘功能
+      shortcuts: Appshortcuts.defaults,
+      //主题
+      theme: ThemeData(fontFamily: $styles.text.body.fontFamily, useMaterial3: true),
+      //默认颜色
+      color: $styles.colors.black,
+      //
+      localizationsDelegates: const [
+        //自定义本地化代理
+        AppLocalizations.delegate,
+        // 支持 Material 风格组件
+        GlobalMaterialLocalizations.delegate,
+        //支持基本的 Widget 文本本地化
+        GlobalWidgetsLocalizations.delegate,
+        // 支持 Cupertino 风格组件
+        GlobalCupertinoLocalizations.delegate
       ],
+      //Flutter 应用支持哪些语言。
       supportedLocales: AppLocalizations.supportedLocales,
     );
   }
