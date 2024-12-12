@@ -93,8 +93,6 @@ AppRoute get _timelineRoute {
   return AppRoute(
   'timeline',
   (s) => const Placeholder(),
-
-
   );
 }
 

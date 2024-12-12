@@ -38,8 +38,9 @@ class _IntroScreenState extends State<IntroScreen> {
 
 
   void _incrementPage(int dir) {
+    print("-----");
     final int current = _pageController.page!.round();
-    if(_isOnFirstPage && dir > 0) return;
+    if(_isOnFirstPage && dir < 0) return;
     if(_isOnLastPage  && dir > 0) return;
     _pageController.animateToPage(current + dir, duration: 250.ms, curve: Curves.easeIn);
 
@@ -73,17 +74,21 @@ class _IntroScreenState extends State<IntroScreen> {
 
     final List<Widget> pages = pageData.map((e) => _Page(e)).toList(); // pageData.map((e) => _Page(data: e)).toList();
 
-    //第一步设置背景颜色
+    //设置默认文字的颜色
     return DefaultTextColor(
         color: $styles.colors.offWhite,
+
+        //设置背景
         child: ColoredBox(
           color: $styles.colors.black,
+          //设置安全区域
           child: SafeArea(
+
+            //动画
             child: Animate(
-              delay: 500.ms,
+              delay: 3500.ms,
               effects: [FadeEffect()],
               child: PreviousNextNavigation(
-
                 maxWidth: 600,
                 nextBtnColor: _isOnLastPage ? $styles.colors.accent1 : null,
                 onPreviousPressed: _isOnFirstPage ? null : () => _incrementPage(-1),

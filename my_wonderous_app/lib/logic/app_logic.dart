@@ -71,13 +71,16 @@ class AppLogic {
     }
 
     //判断是否是第一次进入APP，如果是进入欢迎页面
-    bool showIntro = settingsLogic.hasCompletedOnboarding.value = false;
-    if(showIntro) {
-      appRouter.go(ScreenPaths.intro);
-    }else {
-      //进入主页
-      appRouter.go(ScreenPaths.home);
-    }
+    // bool showIntro = settingsLogic.hasCompletedOnboarding.value = false;
+    // if(showIntro) {
+    //   appRouter.go(ScreenPaths.intro);
+    // }else {
+    //   //进入主页
+    //   appRouter.go(ScreenPaths.home);
+    // }
+
+    appRouter.go(ScreenPaths.intro);
+
 
   }
 
