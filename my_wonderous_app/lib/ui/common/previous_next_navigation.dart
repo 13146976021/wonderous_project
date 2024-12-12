@@ -8,9 +8,15 @@ import 'package:wonders/ui/common/controls/circle_buttons.dart';
 import 'package:wonders/ui/common/fullscreen_keyboard_listener.dart';
 
 
+
+/// 仅供出iPhone以外的端使用，包含：
+/// 1.两个按钮（上一页、下一页）
+/// 2.监听键盘左右键
+/// 3.监听鼠标滚轮使用
 class PreviousNextNavigation extends StatefulWidget {
   const PreviousNextNavigation(
       {super.key,
+
         required this.onPreviousPressed,
         required this.onNextPressed,
         required this.child,
@@ -19,14 +25,20 @@ class PreviousNextNavigation extends StatefulWidget {
         this.previousBtnColor,
         this.listenToMouseWheel = true});
 
+  //上一页
   final VoidCallback? onPreviousPressed;
+  //下一页
   final VoidCallback? onNextPressed;
+  //下一页颜色
   final Color? nextBtnColor;
+  //上一页颜色
   final Color? previousBtnColor;
-  final Widget child;
-  final double? maxWidth;
-  final bool listenToMouseWheel;
 
+  final Widget child;
+  //最大宽度
+  final double? maxWidth;
+  //是否监听鼠标滚轮
+  final bool listenToMouseWheel;
 
 
   @override
@@ -47,19 +59,17 @@ class _PreviousNextNavigationState extends State<PreviousNextNavigation> {
       widget.onNextPressed?.call();
 
     }
-
     return false;
-
   }
 
 
 
   void _handleMouseScroll(event) {
+
     if(event is PointerScrollEvent) {
       if(DateTime.now().millisecondsSinceEpoch - _lastMouseScrollTime.millisecondsSinceEpoch < _scrollColldownMs) {
         return;
       }
-
       _lastMouseScrollTime = DateTime.now();
 
       if(event.scrollDelta.dy > 0 && widget.onPreviousPressed != null) {
@@ -74,10 +84,15 @@ class _PreviousNextNavigationState extends State<PreviousNextNavigation> {
   Widget build(BuildContext context) {
     if(PlatformInfo.isMobile) return widget.child;
 
+    //注册监听
     return Listener(
+      //鼠标滚动
       onPointerSignal: widget.listenToMouseWheel ? _handleMouseScroll : null,
+      //监听键盘
       child:  FullscreenKeyboardListener(
+          //触发监听方法
           onKeyDown: _handleKeyDown,
+          //当期页面布局。类似这样  <- [主要内容] ->
           child: Stack(
             children: [
               widget.child,
@@ -94,7 +109,9 @@ class _PreviousNextNavigationState extends State<PreviousNextNavigation> {
                           semanticLabel: 'Previous',
                           bgColor: widget.previousBtnColor,
                         ),
-                        Spacer(),
+
+                        //占位符
+                        const Spacer(),
                         CircleIconBtn(
                           icon: AppIcons.prev,
                           onPressed: widget.onNextPressed,

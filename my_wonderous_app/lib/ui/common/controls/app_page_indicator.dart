@@ -14,11 +14,17 @@ class AppPageIndicator extends StatefulWidget {
     this.color,
   }) : semanticPageTitle = semanticPageTitle ?? $strings.appPageDefaultTitlePage;
 
+   //总个数
   final int count;
+  //控制器
   final PageController controller;
+  //选中事件
   final void Function(int index)? onDotPressed;
+  //颜色
   final Color? color;
+  //指示器大小
   final double? dotSize;
+  //辅助文字
   final String? semanticPageTitle;
 
   @override
@@ -27,23 +33,30 @@ class AppPageIndicator extends StatefulWidget {
 
 class _AppPageIndicatorState extends State<AppPageIndicator> {
 
+  //创建一个页面的值监听器
   final _currentPage = ValueNotifier(0);
+  //获取控制器当前的页面
   int get _controllerPage => _currentPage.value;
 
+  //页面改变的是调用
   void _handlePageChanged() {
-    //获取当前的页面
+    //更改值监听器
     _currentPage.value = widget.controller.page!.round();
   }
   @override
   void initState() {
+    //添加对controller添加监听
     widget.controller.addListener(_handlePageChanged);
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
 
+    //页面布局
     return Stack(
       children: [
+
+        //屏幕阅读器
         Container(
           color: Colors.transparent,
           height: 30,

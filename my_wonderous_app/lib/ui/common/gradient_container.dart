@@ -28,7 +28,20 @@ class GradientContainer extends StatelessWidget {
       width: width,
       height: height,
       alignment: alignment,
+      /*
+      *   color	Color?	设置背景颜色。
+      *   image	DecorationImage?	设置背景图片，可以配置图片的重复模式、对齐方式等。
+      *   gradient	Gradient?	设置渐变背景，可以是线性渐变、径向渐变等。
+      *   border	BoxBorder?	设置边框，包括颜色、宽度、样式等。
+      *   borderRadius	BorderRadius?	设置圆角边框，需要配合 border 属性使用，或者直接影响背景的圆角。
+      *   boxShadow	List<BoxShadow>?	设置阴影效果，包括颜色、模糊半径、偏移等。
+      *   shape	BoxShape	设置形状，支持矩形（默认）或圆形。
+      *
+      * */
+
+      //设置背景颜色、背景图片、渐变、边框、阴影、圆角等效果。
       decoration: BoxDecoration(
+        //设置渐变背景，可以是线性渐变、径向渐变等。
         gradient: LinearGradient(
           begin: begin ?? Alignment.centerLeft,
           end: end ?? Alignment.centerRight,
